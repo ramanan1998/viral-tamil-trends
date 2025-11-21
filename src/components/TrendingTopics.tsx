@@ -16,49 +16,27 @@ export interface YouTubeVideoCategory {
   };
 }
 
-const mockTrendingTopics: TrendingTopic[] = [
-  { id: "1", title: "IPL 2025 Updates", category: "Sports", views: "2.3M" },
-  {
-    id: "2",
-    title: "Tamil Movie Reviews",
-    category: "Entertainment",
-    views: "1.8M",
-  },
-  { id: "3", title: "Tech Tips Tamil", category: "Technology", views: "1.5M" },
-  { id: "4", title: "Cooking Recipes", category: "Food", views: "1.2M" },
-  { id: "5", title: "Travel Vlog Ideas", category: "Travel", views: "980K" },
-  { id: "6", title: "Fitness Motivation", category: "Health", views: "850K" },
-  {
-    id: "7",
-    title: "Tamil Comedy Trends",
-    category: "Entertainment",
-    views: "750K",
-  },
-  { id: "8", title: "Business Tips", category: "Education", views: "620K" },
-];
 
 interface TrendingTopicsProps {
   onTopicSelect: (topic: TrendingTopic) => void;
   isGenerating: boolean;
 }
 
-const tendiings = async () => {
-  const API_KEY = "AIzaSyD-S38SRgK3IVaBY3AsSDd24RQgow4GfmE";
+const getTrendings = async () => {
 
   const url = `https://www.googleapis.com/youtube/v3/videoCategories?maxResults=10&relevanceLanguage=ta&key=AIzaSyD-S38SRgK3IVaBY3AsSDd24RQgow4GfmE&regionCode=IN`;
 
   const response = await axios.get(url);
   return response.data;
 };
+
 const printData = async () => {
-  const data = await tendiings();
+  const data = await getTrendings();
   return data;
 };
 
-export const TrendingTopics = ({
-  onTopicSelect,
-  isGenerating,
-}: TrendingTopicsProps) => {
+export const TrendingTopics = ({ onTopicSelect, isGenerating }: TrendingTopicsProps) => {
+
   const [videos, setVideos] = useState<YouTubeVideoCategory[]>();
 
   useEffect(() => {
@@ -70,7 +48,6 @@ export const TrendingTopics = ({
     fetchTamilTrends();
   }, []);
 
-  console.log(videos);
 
   return (
     <section className="py-16 px-4">
@@ -114,19 +91,19 @@ export const TrendingTopics = ({
                 </div>
 
                 <div className="flex items-center justify-between pt-2">
-                  <div className="flex items-center gap-2 text-muted-foreground">
+                  {/* <div className="flex items-center gap-2 text-muted-foreground">
                     <Eye className="h-4 w-4" />
                     <span className="text-sm font-medium">
-                      {/* {topic?.views} */}
                        views
                     </span>
-                  </div>
+                  </div> */}
 
                   <Button
                     variant="ghost"
                     size="sm"
                     className="group-hover:bg-primary group-hover:text-primary-foreground"
                     disabled={isGenerating}
+                    onClick={() => onTopicSelect({ id: "", category: "", title: topic?.snippet?.title, views: ""  })}
                   >
                     Generate
                     <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
