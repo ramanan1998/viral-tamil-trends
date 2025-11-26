@@ -1,9 +1,14 @@
 import { Sparkles, TrendingUp, Zap } from "lucide-react";
 import { SignupForm } from "./SignupForm";
+import { useLocation } from "react-router-dom";
+import { SigninForm } from "./SigninForm";
 
-export const Hero = () => {
+export const AuthHero = () => {
+   const { pathname } = useLocation();
+    console.log(pathname)
+
   return (
-    <section className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-gradient-to-br from-primary via-secondary to-accent pt-24 pb-10 px-4">
+    <section className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-gradient-to-br from-primary via-secondary to-accent pt-5 pb-10 px-4">
       <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGMzLjMxNCAwIDYgMi42ODYgNiA2cy0yLjY4NiA2LTYgNi02LTIuNjg2LTYtNiAyLjY4Ni02IDYtNnptMCAzNmMzLjMxNCAwIDYgMi42ODYgNiA2cy0yLjY4NiA2LTYgNi02LTIuNjg2LTYtNiAyLjY4Ni02IDYtNnpNMCA1NGMzLjMxNCAwIDYgMi42ODYgNiA2cy0yLjY4Ni02LTYtNi02LTIuNjg2LTYtNiAyLjY4Ni02IDYtNnoiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIuNSIgb3BhY2l0eT0iLjEiLz48L2c+PC9zdmc+')] opacity-20"></div>
       
       <div className="container mx-auto max-w-6xl relative z-10 flex-1 flex flex-col items-center justify-center gap-12">
@@ -21,13 +26,13 @@ export const Hero = () => {
           </div>
           
           <h1 className="text-5xl md:text-7xl font-bold text-primary-foreground leading-tight">
-            Tamil Viral Script
-            <br />
+            Tamil Script AI
+            
             <span className="text-accent-foreground">Generator</span>
           </h1>
           
           <p className="text-xl md:text-2xl text-primary-foreground/90 max-w-3xl mx-auto font-medium">
-            Trending topics-ல இருந்து viral Tamil scripts உடனே generate பண்ணுங்க! 🚀
+            Trending topics-ல இருந்து Tamil scripts உடனே generate பண்ணுங்க! 🚀
           </p>
           
           <div className="flex flex-wrap justify-center gap-4 text-sm md:text-base text-primary-foreground/80 pt-4">
@@ -47,12 +52,13 @@ export const Hero = () => {
         </div>
 
         <div className="w-full animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-200">
-          <SignupForm />
+ {pathname === '/signup' && <SignupForm />}
+ {pathname === '/signin' && <SigninForm />}
         </div>
       </div>
 
-      <div className="relative z-10 text-center text-primary-foreground/60 text-sm mt-12">
-        @2025 blackwins tech.all rights reserved
+      <div className="relative z-10 text-center font-semibold text-sm mt-12">
+        @2025 blackwins Tech Solutions .All rights reserved
       </div>
     </section>
   );
