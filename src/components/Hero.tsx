@@ -1,11 +1,12 @@
 import { Sparkles, TrendingUp, Zap } from "lucide-react";
+import { SignupForm } from "./SignupForm";
 
 export const Hero = () => {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-primary via-secondary to-accent py-20 px-4">
+    <section className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-gradient-to-br from-primary via-secondary to-accent pt-24 pb-10 px-4">
       <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGMzLjMxNCAwIDYgMi42ODYgNiA2cy0yLjY4NiA2LTYgNi02LTIuNjg2LTYtNiAyLjY4Ni02IDYtNnptMCAzNmMzLjMxNCAwIDYgMi42ODYgNiA2cy0yLjY4NiA2LTYgNi02LTIuNjg2LTYtNiAyLjY4Ni02IDYtNnpNMCA1NGMzLjMxNCAwIDYgMi42ODYgNiA2cy0yLjY4Ni02LTYtNi02LTIuNjg2LTYtNiAyLjY4Ni02IDYtNnoiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIuNSIgb3BhY2l0eT0iLjEiLz48L2c+PC9zdmc+')] opacity-20"></div>
       
-      <div className="container mx-auto max-w-6xl relative z-10">
+      <div className="container mx-auto max-w-6xl relative z-10 flex-1 flex flex-col items-center justify-center gap-12">
         <div className="text-center space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-1000">
           <div className="flex justify-center gap-4 mb-4">
             <div className="bg-primary-foreground/10 p-3 rounded-full backdrop-blur-sm">
@@ -44,7 +45,16 @@ export const Hero = () => {
             </div>
           </div>
         </div>
+
+        <div className="w-full animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-200">
+          <SignupForm />
+        </div>
+      </div>
+
+      <div className="relative z-10 text-center text-primary-foreground/60 text-sm mt-12">
+        @2025 blackwins tech.all rights reserved
       </div>
     </section>
   );
 };
+
