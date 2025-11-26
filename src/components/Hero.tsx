@@ -20,13 +20,13 @@ export const Hero = () => {
           </div>
           
           <h1 className="text-5xl md:text-7xl font-bold text-primary-foreground leading-tight">
-            Tamil Viral Script
+            Tamil Script AI
             <br />
             <span className="text-accent-foreground">Generator</span>
           </h1>
           
           <p className="text-xl md:text-2xl text-primary-foreground/90 max-w-3xl mx-auto font-medium">
-            Trending topics-ல இருந்து viral Tamil scripts உடனே generate பண்ணுங்க! 🚀
+            Trending topics-ல இருந்து Tamil scripts உடனே generate பண்ணுங்க! 🚀
           </p>
           
           <div className="flex flex-wrap justify-center gap-4 text-sm md:text-base text-primary-foreground/80 pt-4">

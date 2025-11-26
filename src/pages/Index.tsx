@@ -21,43 +21,19 @@ export type GeneratedScript = {
 };
 
 const Index = () => {
-  const [selectedTopic, setSelectedTopic] = useState<TrendingTopic | null>(null);
-  const [generatedScript, setGeneratedScript] = useState<GeneratedScript | null>(null);
-  const [isGenerating, setIsGenerating] = useState(false);
-
-
-  const handleTopicSelect = async (topic: TrendingTopic) => {
-    setSelectedTopic(topic);
-    setIsGenerating(true);
-
-    const response = await axios({
-      method: "get",
-      url: `https://viral-tamil-trends-backend.onrender.com/api/generate?query=${topic.title}`
-    });
-
-    const content = response.data.content[0]
-    
-    // Simulate AI generation - replace with real API call later
-    setGeneratedScript({
-      topic: content.topic,
-      hook: content.hook,
-      script: content.script,
-      cta: content.cta,
-      hashtags: content.hashtags,
-      caption: content.caption
-    });
-    setIsGenerating(false);
-  };
 
   return (
     <div className="min-h-screen bg-background">
       <Hero />
-      <TrendingTopics onTopicSelect={handleTopicSelect} isGenerating={isGenerating} />
-      {(generatedScript || isGenerating) && (
-        <ScriptDisplay script={generatedScript} isLoading={isGenerating} />
-      )}
+      <TrendingTopics />
     </div>
   );
 };
 
 export default Index;
+
+
+// <TrendingTopics onTopicSelect={handleTopicSelect} isGenerating={isGenerating} />
+//       {(generatedScript || isGenerating) && (
+//         <ScriptDisplay script={generatedScript} isLoading={isGenerating} />
+//       )}
