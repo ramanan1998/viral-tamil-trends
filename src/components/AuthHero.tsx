@@ -52,8 +52,8 @@ export const AuthHero = () => {
         </div>
 
         <div className="w-full animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-200">
- {pathname === '/signup' && <SignupForm />}
- {pathname === '/signin' && <SigninForm />}
+        {pathname === '/signup' && <SignupForm />}
+        {pathname === '/signin' && <SigninForm />}
         </div>
       </div>
 

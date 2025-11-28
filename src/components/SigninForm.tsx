@@ -12,6 +12,13 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { useMutation } from "@tanstack/react-query";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "@/hooks/use-toast";
+import { AxiosError } from "axios";
+import { signin } from "@/lib/api";
+import { LoaderCircle } from "lucide-react";
+import { useAuth } from "@/hooks/use-auth";
 
 const formSchema = z.object({
   email: z.string().email({
@@ -23,6 +30,10 @@ const formSchema = z.object({
 });
 
 export const SigninForm = () => {
+
+  const navigate = useNavigate();
+  const { setAuthData } = useAuth();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -31,8 +42,32 @@ export const SigninForm = () => {
     },
   });
 
+  const { mutate, isPending } = useMutation({
+      mutationKey: [ "signin" ],
+      mutationFn: signin,
+      onSuccess: (res) => {
+        setAuthData({ token: res.data.authToken, userId: res.data.userId });
+        navigate("/");
+        toast({
+          title: "Success",
+          variant: "default",
+          description: "Welcome back !",
+        });
+      },
+      onError: (error: AxiosError<any>) => {
+        toast({
+          title: "Error",
+          variant: "destructive",
+          description: error.response.data,
+        });
+      }
+    })
+
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+    mutate({
+      email: values.email,
+      password: values.password
+    })
   }
 
   return (
@@ -53,7 +88,7 @@ export const SigninForm = () => {
                 <FormItem>
                   <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input placeholder="john@example.com" type="email" {...field} />
+                    <Input disabled={isPending} placeholder="john@example.com" type="email" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -66,17 +101,19 @@ export const SigninForm = () => {
                 <FormItem>
                   <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <Input placeholder="******" type="password" {...field} />
+                    <Input disabled={isPending} placeholder="******" type="password" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <Button type="submit" className="w-full">
-              Sign In
+            <Button disabled={isPending} type="submit" className="w-full">
+              {isPending ? <LoaderCircle className="h-5 w-5 animate-spin"/> : "Sign In"}
             </Button>
           </form>
         </Form>
+        <br />
+        <p className="text-center">Don't have an account? <Link to="/signup" className="text-primary font-semibold">Sign Up</Link></p>
       </CardContent>
     </Card>
   );
